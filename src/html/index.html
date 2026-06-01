@@ -1,11 +1,22 @@
 <!doctype html>
 <html lang="ko">
-	{{> head}}
+	<head>
+		{{> head title="메인"}}
+	</head>
 	<body>
 		<div class="wrap">
 			{{> header}}
-			<div class="main"></div>
+
+			<main class="container page-main">
+				<section class="main-visual">
+					<h2 class="main-visual__title">메인 페이지</h2>
+					<p class="main-visual__text">Vite + HTML + SCSS + JS 퍼블리싱 프로젝트입니다.</p>
+				</section>
+			</main>
+
 			{{> footer}}
 		</div>
+
+		<script type="module" src="/assets/js/common.js"></script>
 	</body>
 </html>
