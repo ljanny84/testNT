@@ -1,33 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-  {{> head title="로그인"}}
-</head>
-<body>
-  <div class="wrap">
-    {{> header}}
+	<head>
+		{{> head title="로그인"}}
+	</head>
+	<body>
+		<div class="wrap">
+			{{> header}}
 
-    <main class="container">
-      <h2 class="page-title">로그인</h2>
+			<main class="container">
+				<h2 class="page-title">로그인</h2>
 
-      <div class="form-box">
-        <label class="form-field">
-          <span class="form-field__label">아이디</span>
-          <input type="text" class="input" placeholder="아이디를 입력하세요">
-        </label>
+				<div class="form-box">
+					<label class="form-field">
+						<span class="form-field_label">아이디</span>
+						<input type="text" class="input" placeholder="아이디를 입력하세요" />
+					</label>
 
-        <label class="form-field">
-          <span class="form-field__label">비밀번호</span>
-          <input type="password" class="input" placeholder="비밀번호를 입력하세요">
-        </label>
+					<label class="form-field">
+						<span class="form-field_label">비밀번호</span>
+						<input type="password" class="input" placeholder="비밀번호를 입력하세요" />
+					</label>
 
-        <button type="button" class="btn btn--primary">로그인</button>
-      </div>
-    </main>
+					<button type="button" class="btn btn--primary">로그인</button>
+				</div>
+			</main>
 
-    {{> footer}}
-  </div>
+			{{> footer}}
+		</div>
 
-  <script type="module" src="/assets/js/common.js"></script>
-</body>
+		<script type="module" src="/assets/js/common.js"></script>
+	</body>
 </html>

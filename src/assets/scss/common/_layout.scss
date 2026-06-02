@@ -1,61 +1,61 @@
 .wrap {
-  min-height: 100vh;
+	min-height: 100vh;
 }
 
 .header {
-  border-bottom: 1px solid #ddd;
-  background: #fff;
+	border-bottom: 1px solid #ddd;
+	background: #fff;
 
-  &__inner {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    max-width: 1200px;
-    height: 72px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
+	&_inner {
+		display: flex;
+		align-items: center;
+		gap: 32px;
+		max-width: 1200px;
+		height: 72px;
+		margin: 0 auto;
+		padding: 0 24px;
+	}
 
-  &__logo {
-    font-size: 22px;
-    font-weight: 700;
-  }
+	&_logo {
+		font-size: 22px;
+		font-weight: 700;
+	}
 }
 
 .gnb {
-  display: flex;
-  gap: 20px;
+	display: flex;
+	gap: 20px;
 
-  &__link {
-    font-size: 15px;
-  }
+	&_link {
+		font-size: 15px;
+	}
 }
 
 .container {
-  max-width: 1200px;
-  min-height: calc(100vh - 132px);
-  margin: 0 auto;
-  padding: 48px 24px;
+	max-width: 1200px;
+	min-height: calc(100vh - 132px);
+	margin: 0 auto;
+	padding: 48px 24px;
 }
 
 .footer {
-  border-top: 1px solid #ddd;
-  background: #f7f8fa;
+	border-top: 1px solid #ddd;
+	background: #f7f8fa;
 
-  &__inner {
-    max-width: 1200px;
-    height: 60px;
-    margin: 0 auto;
-    padding: 20px 24px;
-  }
+	&_inner {
+		max-width: 1200px;
+		height: 60px;
+		margin: 0 auto;
+		padding: 20px 24px;
+	}
 
-  &__copy {
-    font-size: 13px;
-    color: #666;
-  }
+	&_copy {
+		font-size: 13px;
+		color: #666;
+	}
 }
 
 .page-title {
-  margin-bottom: 24px;
-  font-size: 32px;
+	margin-bottom: 24px;
+	font-size: 32px;
 }

@@ -1,22 +1,22 @@
 .form-box {
-  display: grid;
-  gap: 16px;
-  max-width: 420px;
+	display: grid;
+	gap: 16px;
+	max-width: 420px;
 }
 
 .form-field {
-  display: grid;
-  gap: 8px;
+	display: grid;
+	gap: 8px;
 
-  &__label {
-    font-weight: 700;
-  }
+	&_label {
+		font-weight: 700;
+	}
 }
 
 .input {
-  width: 100%;
-  height: 44px;
-  padding: 0 14px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+	width: 100%;
+	height: 44px;
+	padding: 0 14px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
 }

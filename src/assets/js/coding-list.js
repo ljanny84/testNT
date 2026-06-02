@@ -1,127 +1,103 @@
 import "../scss/style.scss";
 
-const stateMap = {
-	wait: "대기",
-	ing: "작업중",
-	done: "완료",
-	hold: "보류",
-	modify: "수정중",
-	review: "검수요청",
+const STATE = {
+	wait: ["대기", "wait"],
+	ing: ["작업중", "ing"],
+	done: ["완료", "done"],
+	hold: ["보류", "hold"],
+	modify: ["수정중", "modify"],
+	review: ["검수요청", "review"],
 };
 
-const stateClassMap = {
-	wait: "tree__state--wait",
-	ing: "tree__state--ing",
-	done: "tree__state--done",
-	hold: "tree__state--hold",
-	modify: "tree__state--modify",
-	review: "tree__state--review",
+const $ = (selector) => document.querySelector(selector);
+
+const els = {
+	tree: $("[data-tree]"),
+	frame: $("[data-view-frame]"),
+	title: $("[data-view-title]"),
+	path: $("[data-view-path]"),
+	link: $("[data-view-link]"),
+	total: $("[data-total]"),
+	done: $("[data-done]"),
 };
 
-const treeEl = document.querySelector("[data-tree]");
-const frameEl = document.querySelector("[data-view-frame]");
-const titleEl = document.querySelector("[data-view-title]");
-const pathEl = document.querySelector("[data-view-path]");
-const linkEl = document.querySelector("[data-view-link]");
-const totalEl = document.querySelector("[data-total]");
-const doneEl = document.querySelector("[data-done]");
+document.addEventListener("DOMContentLoaded", init);
 
-async function initCodingList() {
+async function init() {
 	try {
-		const response = await fetch("/data/coding-list.json");
-
-		if (!response.ok) {
-			throw new Error("coding-list.json을 불러오지 못했습니다.");
-		}
-
-		const data = await response.json();
+		const data = await fetch("/data/coding-list.json").then((res) => res.json());
 
 		renderSummary(data);
 		renderTree(data);
 		bindEvents();
 
-		const firstItem = document.querySelector(".tree__item");
-		if (firstItem) firstItem.click();
+		els.tree.querySelector(".tree_item")?.click();
 	} catch (error) {
-		treeEl.innerHTML = `<p class="tree__error">${error.message}</p>`;
+		els.tree.innerHTML = `<p class="tree_error">코딩리스트를 불러오지 못했습니다.</p>`;
 	}
 }
 
 function renderSummary(data) {
 	const pages = data.flatMap((group) => group.children || []);
-	const donePages = pages.filter((page) => page.state === "done");
 
-	totalEl.textContent = pages.length;
-	doneEl.textContent = donePages.length;
+	els.total.textContent = pages.length;
+	els.done.textContent = pages.filter((page) => page.state === "done").length;
 }
 
 function renderTree(data) {
-	treeEl.innerHTML = data
-		.map((group) => {
-			const children = group.children || [];
+	els.tree.innerHTML = data
+		.map(
+			(group) => `
+		<div class="tree_group is-open">
+			<button type="button" class="tree_depth1">
+				<span>${group.title}</span>
+				<span class="tree_count">${group.children?.length || 0}</span>
+			</button>
 
-			return `
-      <div class="tree__group is-open">
-        <button type="button" class="tree__depth1">
-          <span>${group.title}</span>
-          <span class="tree__count">${children.length}</span>
-        </button>
-
-        <div class="tree__list">
-          ${children.map((page) => renderItem(page)).join("")}
-        </div>
-      </div>
-    `;
-		})
+			<div class="tree_list">
+				${(group.children || []).map(renderItem).join("")}
+			</div>
+		</div>
+	`,
+		)
 		.join("");
 }
 
 function renderItem(page) {
-	const stateText = stateMap[page.state] || page.state || "-";
-	const stateClass = stateClassMap[page.state] || "tree__state--wait";
+	const [text, className] = STATE[page.state] || [page.state || "-", "wait"];
 
 	return `
-    <button
-      type="button"
-      class="tree__item"
-      data-url="${page.url}"
-      data-name="${page.name}"
-      data-id="${page.id || ""}"
-    >
-      <span class="tree__name">${page.name}</span>
-      <span class="tree__meta">
-        <span class="tree__id">${page.id || "-"}</span>
-        <span class="tree__state ${stateClass}">${stateText}</span>
-      </span>
-    </button>
-  `;
+		<button type="button" class="tree_item" data-url="${page.url}" data-name="${page.name}">
+			<span class="tree_name">${page.name}</span>
+			<span class="tree_meta">
+				<span class="tree_id">${page.id || "-"}</span>			
+				<span class="tree_state ${className}">${text}</span>
+			</span>
+			<span class="tree_worker">${page.worker}</span>
+		</button>
+	`;
 }
 
 function bindEvents() {
-	document.querySelectorAll(".tree__depth1").forEach((button) => {
-		button.addEventListener("click", () => {
-			const group = button.closest(".tree__group");
-			if (group) group.classList.toggle("is-open");
-		});
-	});
+	els.tree.addEventListener("click", (event) => {
+		const depth = event.target.closest(".tree_depth1");
+		const item = event.target.closest(".tree_item");
 
-	document.querySelectorAll(".tree__item").forEach((item) => {
-		item.addEventListener("click", () => {
-			const url = item.dataset.url;
-			const name = item.dataset.name;
+		if (depth) {
+			depth.closest(".tree_group")?.classList.toggle("is-open");
+			return;
+		}
 
-			document.querySelectorAll(".tree__item").forEach((el) => {
-				el.classList.remove("is-active");
-			});
+		if (!item) return;
 
-			item.classList.add("is-active");
+		els.tree.querySelector(".tree_item.is-active")?.classList.remove("is-active");
+		item.classList.add("is-active");
 
-			frameEl.src = url;
-			titleEl.textContent = name;
-			pathEl.textContent = url;
-			linkEl.href = url;
-		});
+		const { url, name } = item.dataset;
+
+		els.frame.src = url;
+		els.title.textContent = name;
+		els.path.textContent = url;
+		els.link.href = url;
 	});
 }
-
-initCodingList();

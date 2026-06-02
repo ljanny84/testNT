@@ -1,28 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-  {{> head title="공지사항 목록"}}
-</head>
-<body>
-  <div class="wrap">
-    {{> header}}
+	<head>
+		{{> head title="공지사항 목록"}}
+	</head>
+	<body>
+		<div class="wrap">
+			{{> header}}
 
-    <main class="container">
-      <h2 class="page-title">공지사항</h2>
+			<main class="container">
+				<h2 class="page-title">공지사항</h2>
 
-      <ul class="board-list">
-        <li class="board-list__item">
-          <a href="/pages/notice-detail.html" class="board-list__link">
-            <strong class="board-list__title">공지사항 제목입니다.</strong>
-            <span class="board-list__date">2026.06.01</span>
-          </a>
-        </li>
-      </ul>
-    </main>
+				<ul class="board-list">
+					<li class="board-list__item">
+						<a href="/pages/notice-detail.html" class="board-list_link">
+							<strong class="board-list_title">공지사항 제목입니다.</strong>
+							<span class="board-list_date">2026.06.01</span>
+						</a>
+					</li>
+				</ul>
+			</main>
 
-    {{> footer}}
-  </div>
+			{{> footer}}
+		</div>
 
-  <script type="module" src="/assets/js/common.js"></script>
-</body>
+		<script type="module" src="/assets/js/common.js"></script>
+	</body>
 </html>
