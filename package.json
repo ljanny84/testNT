@@ -1,19 +1,24 @@
 {
-	"name": "vite-publishing-template-dist-structure",
+	"name": "NT PROJECT",
 	"version": "0.0.0",
 	"private": true,
 	"type": "module",
+	"engines": {
+		"node": "24.15"
+	},
 	"scripts": {
-		"dev": "vite",
-		"build": "vite build",
+		"sync": "node scripts/sync-coding-list.js",
+		"dev": "npm run sync && vite",
+		"build": "npm run sync && vite build",
 		"preview": "vite preview",
 		"format": "prettier . --write"
 	},
 	"devDependencies": {
-		"glob": "^10.4.5",
-		"prettier": "^3.5.0",
-		"sass": "^1.77.0",
-		"vite": "^5.4.21",
-		"vite-plugin-handlebars": "^2.0.0"
+		"glob": "^13.0.6",
+		"npm-check-updates": "^22.2.1",
+		"prettier": "^3.8.3",
+		"sass": "^1.100.0",
+		"vite": "^8.0.16",
+		"vite-plugin-handlebars": "^2.0.3"
 	}
 }
